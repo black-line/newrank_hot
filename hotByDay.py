@@ -31,9 +31,10 @@ def get_content():
     }
 
     # get current time
-    now = datetime.datetime.now().date()
-    start = now
-    end = now
+    now = datetime.datetime.now()
+    yesterday = (now + datetime.timedelta(days = -1)).date()
+    start = yesterday
+    end = yesterday
 
     # set nance (0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f)9 of 16
     nonce = '012345678'
@@ -46,10 +47,10 @@ def get_content():
 
     # deal with form data
     form_data = urllib.parse.urlencode({
-        'end': now,
+        'end': end,
         'rank_name': '时事',
         'rank_name_group': '资讯',
-        'start': now,
+        'start': start,
         'nonce': nonce,
         'xyz': xyz
     }).encode()
@@ -68,7 +69,7 @@ def get_content():
 
     ori_content = json.loads(data)
     inner_content = ori_content['value']
-
+    print('正在获取 '+yesterday.__str__()+' 的数据')
     return inner_content
 
 
