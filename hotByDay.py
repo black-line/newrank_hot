@@ -32,7 +32,7 @@ def get_content():
 
     # get current time
     now = datetime.datetime.now()
-    yesterday = (now + datetime.timedelta(days = -1)).date()
+    yesterday = (now + datetime.timedelta(days = -2)).date()
     start = yesterday
     end = yesterday
 
@@ -146,6 +146,7 @@ def get_rownum_from_db():
 
 if __name__ == '__main__':
     content = get_content()
+    print(content)
     store_to_db(content)
     rownum = get_rownum_from_db()
     print('数据库中共有 '+str(rownum)+' 条数据')
